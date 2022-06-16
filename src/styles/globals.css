@@ -8,7 +8,7 @@ html,
 body {
   font-family: "DM Serif Display", serif;
   font-family: "Inter", sans-serif;
-  @apply bg-primary w-screen;
+  @apply bg-primary w-full min-h-screen duration-500;
 }
 
 * {
@@ -19,6 +19,14 @@ body {
   h1 {
     @apply text-2xl font-bold;
   }
+
+  h2 {
+    @apply text-lg my-2 font-medium;
+  }
+
+  a {
+    @apply text-red-light underline hover:text-red-dark;
+  }
 }
 
 @layer utilities {
@@ -26,8 +34,20 @@ body {
     @apply bg-white dark:bg-black;
   }
 
+  .border-primary {
+    @apply border-gray-900 dark:border-white;
+  }
+
+  .border-secondary {
+    @apply border-gray-200 dark:border-gray-600;
+  }
+
   .text-primary {
     @apply text-black dark:text-white;
+  }
+
+  .text-secondary {
+    @apply text-gray-700 dark:text-gray-300;
   }
 
   .fill-primary {

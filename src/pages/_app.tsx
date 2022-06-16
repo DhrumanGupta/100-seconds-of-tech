@@ -9,7 +9,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider attribute="class" defaultTheme={Theme.Light}>
       <Navbar />
-      <Component {...pageProps} />
+      <div className="mx-8 pb-12">
+        <Component {...pageProps} />
+      </div>
     </ThemeProvider>
   );
 }
