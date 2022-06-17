@@ -7,7 +7,7 @@ import Content from "../components/typography/content";
 
 const Home: NextPage = () => {
   return (
-    <main className="">
+    <>
       <MetaDecorator
         description="100 Seconds of Tech brings free, educative, short form content about
           programming and computer science, so you can learn something new every
@@ -82,7 +82,7 @@ const Home: NextPage = () => {
           ]}
         />
       </section>
-    </main>
+    </>
   );
 };
 
