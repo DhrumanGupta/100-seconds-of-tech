@@ -145,7 +145,7 @@ const MobileMenu: FC = () => (
   <Menu>
     {({ isExpanded }) => (
       <>
-        <MenuButton className="my-auto">
+        <MenuButton>
           {isExpanded ? (
             <Close className="w-8 h-8 fill-primary" />
           ) : (
@@ -160,8 +160,8 @@ const MobileMenu: FC = () => (
 
 const Navbar: FC<INavbarProps> = () => {
   return (
-    <div className="py-9 lg:py-12 mx-8 lg:px-5vw">
-      <nav className="w-full justify-between relative flex items-center lg:justify-center lg:px-5vw">
+    <div className="py-9 lg:py-12 xmx-8 xlg:px-5vw">
+      <nav className="w-full justify-between relative flex items-center lg:justify-center xlg:px-5vw">
         <Link href="/">
           <h1 className="text-red-light inline lg:mr-auto hover:cursor-pointer hover:underline">
             100 Seconds of Tech
@@ -181,7 +181,7 @@ const Navbar: FC<INavbarProps> = () => {
         </ul>
 
         <div className="flex items-center justify-center">
-          <div className="block lg:hidden">
+          <div className="flex items-center lg:hidden">
             <MobileMenu />
           </div>
 

@@ -6,7 +6,11 @@ const Content: React.FunctionComponent<ITypograpyProps> = ({
   children,
   className,
 }) => {
-  return <p className={clsx("text-secondary mt-2", className)}>{children}</p>;
+  return (
+    <p className={clsx("text-secondary mt-2 max-w-lg lg:max-w-2xl", className)}>
+      {children}
+    </p>
+  );
 };
 
 export default Content;
