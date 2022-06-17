@@ -1,22 +1,32 @@
 import Link from "next/link";
 import React from "react";
-import Play from "../icons/Play";
+import Image from "next/image";
 
 export interface IListItemProps {
   to: string;
   name: string;
+  description: string;
+  image: string;
 }
 
-const ListItem: React.FC<IListItemProps> = ({ to, name }) => {
+const ListItem: React.FC<IListItemProps> = ({
+  to,
+  name,
+  description,
+  image,
+}) => {
   return (
-    <li className="mt-4">
-      <Link href={to}>
-        <a className="flex items-center text-primary no-underline duration-75 hover:text-red-light">
-          <Play className="fill-red-light" />
-          <p className="ml-4">{name}</p>
-        </a>
-      </Link>
-    </li>
+    <Link href={to}>
+      <div className="card group hover:cursor-pointer">
+        <div className="w-full h-auto aspect-video relative">
+          <Image src={image} alt={name} layout="fill" objectFit="contain" />
+        </div>
+        <h3 className="text-center mt-2 group-hover:text-red-light duration-100">
+          {name}
+        </h3>
+        <p className="text-center text-secondary">{description}</p>
+      </div>
+    </Link>
   );
 };
 

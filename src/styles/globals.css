@@ -13,6 +13,7 @@ body {
 
 * {
   box-sizing: border-box;
+  /* @apply duration-75; */
 }
 
 @layer base {
@@ -21,7 +22,11 @@ body {
   }
 
   h2 {
-    @apply text-lg my-2 font-medium;
+    @apply text-lg my-2 font-semibold xl:text-2xl;
+  }
+
+  h3 {
+    @apply font-semibold;
   }
 
   a {
@@ -29,9 +34,18 @@ body {
   }
 }
 
+@layer components {
+  .card {
+    @apply bg-secondary p-4 rounded duration-200 transition-colors;
+  }
+}
+
 @layer utilities {
   .bg-primary {
     @apply bg-white dark:bg-black;
+  }
+  .bg-secondary {
+    @apply bg-gray-100 dark:bg-gray-900;
   }
 
   .border-primary {
