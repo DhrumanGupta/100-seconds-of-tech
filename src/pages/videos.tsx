@@ -1,29 +1,29 @@
 import { GetStaticProps, NextPage } from "next";
-import MetaDecorator from "../../components/MetaDecorator";
-import { getAllPostData } from "../../lib/posts";
+import MetaDecorator from "../components/MetaDecorator";
+import { getAllVideoData } from "../lib/videos";
 import Image from "next/image";
 import moment from "moment";
 import Link from "next/link";
-import { PostMetaData } from "../../types";
+import { Video } from "../types";
 
-export const getStaticProps: GetStaticProps<{ data: PostMetaData[] }> = async (
+export const getStaticProps: GetStaticProps<{ data: Video[] }> = async (
   context
 ) => {
-  const postData = await getAllPostData();
+  const data = await getAllVideoData();
   // sort posts by date so the most recent ones come at the top
-  postData.sort((a, b) => (a.frontmatter.date >= b.frontmatter.date ? -1 : 1));
+  data.sort((a, b) => (a.date >= b.date ? -1 : 1));
   return {
     props: {
-      data: postData,
+      data,
     },
     revalidate: 3600, // 1 hour
   };
 };
 
-const getKeywords = (metadata: PostMetaData[]): string[] => {
+const getKeywords = (metadata: Video[]): string[] => {
   const keywords: string[] = [];
   metadata.forEach((data) => {
-    data.frontmatter?.keywords?.forEach((keyword) => {
+    data.keywords?.forEach((keyword) => {
       if (!keywords.includes(keyword)) {
         keywords.push(keyword);
       }
@@ -33,44 +33,41 @@ const getKeywords = (metadata: PostMetaData[]): string[] => {
   return keywords;
 };
 
-const Posts: NextPage<{ data: PostMetaData[] }> = ({ data }) => {
+const Videos: NextPage<{ data: Video[] }> = ({ data }) => {
   return (
     <>
       {/* <main className="relative mx-8vw md:mx-10vw"> */}
       <MetaDecorator
-        title="Posts"
-        description="Read our detailed posts about various technologies here!"
+        title="Videos"
+        description="Find all our short-form educative videos here!"
       />
       <div className="relative grid grid-cols-4 gap-x-6 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-8 mx-auto max-w-7xl mb-64">
-        {data.map((postData) => (
+        {data.map((video) => (
           <div
             className={`card col-span-4 mb-12 group hover:cursor-pointer`}
-            key={postData.slug}
+            key={video.title}
           >
             <div className="relative w-full">
-              <Link href={`/blog/${postData.slug}`}>
+              <Link href={`/blog/${video.videoUrl}`}>
                 <div className="focus:outline-none w-full no-underline">
                   <div className="w-full h-auto aspect-video relative">
                     <Image
-                      src={postData.frontmatter.imageUrl}
+                      src={video.imageUrl}
                       layout={"fill"}
                       objectFit="contain"
-                      alt={postData.frontmatter.title}
+                      alt={video.title}
                       className="rounded-t-md"
                     />
                   </div>
                   <p className={"px-4 mt-5 text-lg font-medium text-secondary"}>
-                    {moment(new Date(postData.frontmatter.date)).format(
-                      "MMMM Do[,] YYYY"
-                    )}{" "}
-                    &ndash; {postData.readingTime.text}
+                    {moment(new Date(video.date)).format("MMMM Do[,] YYYY")}{" "}
                   </p>
                   <h2
                     className={
                       "px-4 text-primary mt-0 duration-100 group-hover:text-red-light"
                     }
                   >
-                    {postData.frontmatter.title}
+                    {video.title}
                   </h2>
                 </div>
               </Link>
@@ -83,4 +80,4 @@ const Posts: NextPage<{ data: PostMetaData[] }> = ({ data }) => {
   );
 };
 
-export default Posts;
+export default Videos;

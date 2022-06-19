@@ -1,3 +1,7 @@
 {
-  "name": "Test"
+  "title": "Test",
+  "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "description": "This is a test video",
+  "date": "2018-01-01",
+  "keywords": ["test", "video"]
 }

@@ -12,7 +12,7 @@ interface Post {
   code: string;
 }
 
-type MetaData = Omit<Post, "code">;
+type PostMetaData = Omit<Post, "code">;
 
 interface FrontMatter {
   title: string;
@@ -27,4 +27,4 @@ interface Video extends FrontMatter {
 }
 
 export { Theme };
-export type { Video, Post, FrontMatter, MetaData };
+export type { Video, Post, FrontMatter, PostMetaData };

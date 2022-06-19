@@ -17,7 +17,7 @@ const ListItem: React.FC<IListItemProps> = ({
 }) => {
   return (
     <Link href={to}>
-      <div className="card group hover:cursor-p">
+      <div className="card group hover:cursor-pointer">
         <div className="w-full h-auto aspect-video relative rounded-t">
           <Image
             src={image}
