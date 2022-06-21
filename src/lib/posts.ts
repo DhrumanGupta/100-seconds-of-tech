@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs";
 import { bundleMDX } from "mdx-bundler";
-import { FrontMatter, MetaData, Post } from "../types";
+import { FrontMatter, PostMetaData, Post } from "../types";
 import calculateReadingTime from "reading-time";
 import matter from "gray-matter";
 
@@ -39,10 +39,10 @@ const getPostData = async (slug: string): Promise<Post | null> => {
   };
 };
 
-async function getAllPostData(): Promise<Array<MetaData>> {
+async function getAllPostData(): Promise<Array<PostMetaData>> {
   const slugs = await getAllPostSlugs();
   const posts = await Promise.all(
-    slugs.map(async (slug): Promise<MetaData | null> => {
+    slugs.map(async (slug): Promise<PostMetaData | null> => {
       const filePath = path.join(contentPath, `${slug}.mdx`);
       if (!fs.existsSync(filePath)) {
         return null;
@@ -65,7 +65,7 @@ async function getAllPostData(): Promise<Array<MetaData>> {
       };
     })
   );
-  return posts.filter((x) => Boolean(x)) as Array<MetaData>;
+  return posts.filter((x) => Boolean(x)) as Array<PostMetaData>;
 }
 
 export { getAllPostData, getAllPostSlugs, getPostData };

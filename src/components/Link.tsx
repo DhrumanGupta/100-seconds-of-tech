@@ -4,9 +4,10 @@ import { default as NextLink } from "next/link";
 interface ILinkProps {
   children: React.ReactNode;
   href?: string;
+  [key: string]: any;
 }
 
-const Link: React.FC<ILinkProps> = ({ children, href }) => {
+const Link: React.FC<ILinkProps> = ({ children, href, ...props }) => {
   if (!href) {
     return <>{children}</>;
   }
@@ -20,7 +21,7 @@ const Link: React.FC<ILinkProps> = ({ children, href }) => {
   }
 
   return (
-    <a href={href} target={"_blank"} rel={"noopener noreferrer"}>
+    <a href={href} target={"_blank"} rel={"noopener noreferrer"} {...props}>
       {children}
     </a>
   );

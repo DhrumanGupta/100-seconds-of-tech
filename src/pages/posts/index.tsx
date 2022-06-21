@@ -4,9 +4,9 @@ import { getAllPostData } from "../../lib/posts";
 import Image from "next/image";
 import moment from "moment";
 import Link from "next/link";
-import { MetaData } from "../../types";
+import { PostMetaData } from "../../types";
 
-export const getStaticProps: GetStaticProps<{ data: MetaData[] }> = async (
+export const getStaticProps: GetStaticProps<{ data: PostMetaData[] }> = async (
   context
 ) => {
   const postData = await getAllPostData();
@@ -20,7 +20,7 @@ export const getStaticProps: GetStaticProps<{ data: MetaData[] }> = async (
   };
 };
 
-const getKeywords = (metadata: MetaData[]): string[] => {
+const getKeywords = (metadata: PostMetaData[]): string[] => {
   const keywords: string[] = [];
   metadata.forEach((data) => {
     data.frontmatter?.keywords?.forEach((keyword) => {
@@ -33,11 +33,14 @@ const getKeywords = (metadata: MetaData[]): string[] => {
   return keywords;
 };
 
-const Posts: NextPage<{ data: MetaData[] }> = ({ data }) => {
+const Posts: NextPage<{ data: PostMetaData[] }> = ({ data }) => {
   return (
     <>
       {/* <main className="relative mx-8vw md:mx-10vw"> */}
-      <MetaDecorator title="Blogs" description="Read Dhruman's blogs here" />
+      <MetaDecorator
+        title="Posts"
+        description="Read our detailed posts about various technologies here!"
+      />
       <div className="relative grid grid-cols-4 gap-x-6 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-8 mx-auto max-w-7xl mb-64">
         {data.map((postData) => (
           <div
@@ -45,7 +48,7 @@ const Posts: NextPage<{ data: MetaData[] }> = ({ data }) => {
             key={postData.slug}
           >
             <div className="relative w-full">
-              <Link href={`/blog/${postData.slug}`}>
+              <Link href={`/posts/${postData.slug}`}>
                 <div className="focus:outline-none w-full no-underline">
                   <div className="w-full h-auto aspect-video relative">
                     <Image
