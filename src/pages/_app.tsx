@@ -8,10 +8,10 @@ import { Theme } from "../types";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider attribute="class" defaultTheme={Theme.Light}>
-      <main className="mx-8 pb-12 md:max-w-screen-sm lg:max-w-screen-md xl:max-w-screen-lg md:mx-auto">
-        <Navbar />
+      <Navbar />
+      <div className="mx-8 pb-12 md:max-w-screen-sm lg:max-w-screen-md xl:max-w-screen-lg md:mx-auto">
         <Component {...pageProps} />
-      </main>
+      </div>
     </ThemeProvider>
   );
 }
