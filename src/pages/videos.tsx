@@ -3,7 +3,7 @@ import MetaDecorator from "../components/MetaDecorator";
 import { getAllVideoData } from "../lib/videos";
 import Image from "next/image";
 import moment from "moment";
-import Link from "next/link";
+import Link from "../components/Link";
 import { Video } from "../types";
 
 export const getStaticProps: GetStaticProps<{ data: Video[] }> = async (
@@ -36,20 +36,19 @@ const getKeywords = (metadata: Video[]): string[] => {
 const Videos: NextPage<{ data: Video[] }> = ({ data }) => {
   return (
     <>
-      {/* <main className="relative mx-8vw md:mx-10vw"> */}
       <MetaDecorator
         title="Videos"
         description="Find all our short-form educative videos here!"
       />
-      <div className="relative grid grid-cols-4 gap-x-6 md:grid-cols-8 lg:grid-cols-12 lg:gap-x-8 mx-auto max-w-7xl mb-64">
+      <main className="relative grid grid-cols-4 gap-x-6 md:grid-cols-8 xl:grid-cols-12 lg:gap-x-8 mx-auto max-w-7xl mb-64">
         {data.map((video) => (
           <div
             className={`card col-span-4 mb-12 group hover:cursor-pointer`}
             key={video.title}
           >
             <div className="relative w-full">
-              <Link href={`/blog/${video.videoUrl}`}>
-                <div className="focus:outline-none w-full no-underline">
+              <Link href={video.videoUrl} className="no-underline">
+                <div className="w-full">
                   <div className="w-full h-auto aspect-video relative">
                     <Image
                       src={video.imageUrl}
@@ -74,8 +73,7 @@ const Videos: NextPage<{ data: Video[] }> = ({ data }) => {
             </div>
           </div>
         ))}
-      </div>
-      {/* </main> */}
+      </main>
     </>
   );
 };

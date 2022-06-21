@@ -48,7 +48,7 @@ const Posts: NextPage<{ data: PostMetaData[] }> = ({ data }) => {
             key={postData.slug}
           >
             <div className="relative w-full">
-              <Link href={`/blog/${postData.slug}`}>
+              <Link href={`/posts/${postData.slug}`}>
                 <div className="focus:outline-none w-full no-underline">
                   <div className="w-full h-auto aspect-video relative">
                     <Image

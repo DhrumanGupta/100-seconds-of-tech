@@ -31,7 +31,6 @@ const getVideoData = async (slug: string): Promise<Video | null> => {
 
 const getAllVideoData = async (): Promise<Array<Video>> => {
   const slugs = await getAllVideoSlugs();
-  console.log(slugs);
   const videos = await Promise.all(
     slugs.map(async (slug): Promise<Video | null> => {
       const filePath = path.join(contentPath, `${slug}.json`);

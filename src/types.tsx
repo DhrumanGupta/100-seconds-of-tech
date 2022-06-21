@@ -20,9 +20,10 @@ interface FrontMatter {
   imageUrl: string;
   keywords: string[];
   date: Date | number;
+  authors: string[];
 }
 
-interface Video extends FrontMatter {
+interface Video extends Omit<FrontMatter, "authors"> {
   videoUrl: string;
 }
 
