@@ -5,7 +5,6 @@ import {
   MenuPopover,
   MenuButton,
   useMenuButtonContext,
-  MenuItem,
   MenuLink,
   MenuItems,
 } from "@reach/menu-button";
@@ -15,6 +14,7 @@ import Hamburger from "./icons/Hamburger";
 import clsx from "clsx";
 import { Theme } from "../types";
 import { useTheme } from "next-themes";
+import Image from "next/image";
 
 interface INavbarProps {}
 
@@ -163,9 +163,19 @@ const Navbar: FC<INavbarProps> = () => {
     <div className="py-9 lg:py-12 mx-8 lg:px-5vw">
       <nav className="w-full justify-between relative flex items-center lg:justify-center lg:px-5vw">
         <Link href="/">
-          <h1 className="text-red-light inline lg:mr-auto hover:cursor-pointer hover:underline">
-            100 Seconds of Tech
-          </h1>
+          <div className="lg:mr-auto flex hover:cursor-pointer hover:underline text-red-light">
+            <span className="h-10 aspect-square hidden rounded-t mr-2 relative lg:block">
+              <Image
+                src="/logo/192x192.png"
+                layout="fill"
+                objectFit="contain"
+                alt="Website Logo"
+              />
+            </span>
+            <h1 className="my-auto ml-1 text-red-light inline">
+              100 Seconds of Tech
+            </h1>
+          </div>
         </Link>
 
         <ul className="hidden lg:flex">

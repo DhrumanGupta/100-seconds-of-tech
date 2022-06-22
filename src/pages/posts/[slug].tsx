@@ -29,7 +29,6 @@ const getStaticProps: GetStaticProps = async (context) => {
 
 const getStaticPaths: GetStaticPaths = async () => {
   const slugs = await getAllPostSlugs();
-  console.log(slugs);
 
   return {
     paths: slugs.map((slug) => ({
