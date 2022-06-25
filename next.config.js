@@ -23,9 +23,6 @@ const nextConfig = {
       },
     ];
   },
-  images: {
-    domains: ["fireship.io"],
-  },
 };
 
 module.exports = nextConfig;

@@ -23,7 +23,7 @@ const getStaticProps: GetStaticProps = async (context) => {
 
   return {
     props: postData ? { ...postData } : {},
-    revalidate: 3600,
+    revalidate: 7200, // 2 hours
   };
 };
 

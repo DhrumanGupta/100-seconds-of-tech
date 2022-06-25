@@ -16,7 +16,7 @@ export const getStaticProps: GetStaticProps<{ data: Video[] }> = async (
     props: {
       data,
     },
-    revalidate: 3600, // 1 hour
+    revalidate: 7200, // 2 hours
   };
 };
 

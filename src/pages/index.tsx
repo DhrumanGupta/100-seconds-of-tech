@@ -1,11 +1,33 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
+import type { GetStaticProps, NextPage } from "next";
 import ContentList from "../components/home/ContentList";
 import MetaDecorator from "../components/MetaDecorator";
 import Content from "../components/typography/content";
+import { getAllPostData } from "../lib/posts";
+import { getAllVideoData } from "../lib/videos";
+import { PostMetaData, Video } from "../types";
 
-const Home: NextPage = () => {
+interface Props {
+  posts: PostMetaData[];
+  videos: Video[];
+}
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const postData = await getAllPostData();
+  postData.sort((a, b) => (a.frontmatter.date >= b.frontmatter.date ? -1 : 1));
+
+  const videoData = await getAllVideoData();
+  videoData.sort((a, b) => (a.date >= b.date ? -1 : 1));
+
+  return {
+    props: {
+      videos: videoData.splice(0, 3),
+      posts: postData.splice(0, 3),
+    },
+    revalidate: 3600,
+  };
+};
+
+const Home: NextPage<Props> = ({ videos, posts }) => {
   return (
     <>
       <MetaDecorator
@@ -27,24 +49,12 @@ const Home: NextPage = () => {
           Our 100 Second Videos introduce various concepts in efficient ways
         </Content>
         <ContentList
-          content={[
-            {
-              to: "/stacks",
-              name: "Stacks Explained",
-              description:
-                "Stacks are one of the most important data structures in computer science.",
-              image: "https://fireship.io/courses/angular/img/featured.jpg",
-            },
-            {
-              to: "/queues",
-              name: "Queues Explained",
-              description:
-                "Stacks are one of the most important data structures in computer science.",
-              image: "https://fireship.io/courses/stripe-js/img/featured.jpg",
-            },
-            // { to: "/queues", name: "Queues Explained" },
-            // { to: "/binary-trees", name: "Binary Trees Explained" },
-          ]}
+          content={videos.map((video) => ({
+            to: video.videoUrl,
+            name: video.title,
+            image: video.imageUrl,
+            description: video.description,
+          }))}
         />
       </section>
       <section className="mt-16">
@@ -52,34 +62,13 @@ const Home: NextPage = () => {
         <Content>
           Our posts explaian concepts in detail and extend beyond videos
         </Content>
-        {/* <ContentList
-          content={[
-            { to: "/recursion", name: "So what is Recursion?" },
-            { to: "/typescript", name: "Is TypeScript Worh it?" },
-            { to: "/binary-trees", name: "Binary Trees Explained" },
-          ]}
-        /> */}
         <ContentList
-          content={[
-            {
-              to: "/stacks",
-              name: "Stacks Explained",
-              description:
-                "Stacks are one of the most important data structures in computer science.",
-              image:
-                "https://fireship.io/courses/flutter-firebase/img/featured.jpg",
-            },
-            {
-              to: "/queues",
-              name: "Queues Explained",
-              description:
-                "Stacks are one of the most important data structures in computer science.",
-              image:
-                "https://fireship.io/courses/react-next-firebase/img/featured.jpg",
-            },
-            // { to: "/queues", name: "Queues Explained" },
-            // { to: "/binary-trees", name: "Binary Trees Explained" },
-          ]}
+          content={posts.map((post) => ({
+            to: `/posts/${post.slug}`,
+            name: post.frontmatter.title,
+            image: post.frontmatter.imageUrl,
+            description: post.frontmatter.description,
+          }))}
         />
       </section>
     </>
